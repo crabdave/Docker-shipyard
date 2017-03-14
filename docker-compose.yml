@@ -1,0 +1,59 @@
+
+
+rethinkdb:
+    image: rethinkdb
+    container_name: shipyard-rethinkdb 
+    privileged: true
+    restart: always
+    ports:
+      - 28015:28015   
+    volumes:
+      - ./data/rethinkdb_data:/data/rethinkdb_data
+ 
+discovery:
+    image: microbox/etcd
+    container_name: shipyard-discovery
+    restart: always
+    ports:
+      - 4001:4001
+      - 7001:7001
+    command: -name discovery  
+
+proxy:
+    image: shipyard/docker-proxy
+    container_name: shipyard-proxy
+    privileged: true 
+    restart: always
+    ports:
+      - 5375:2375
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - PORT=2375
+      - HOSTNAME=${HOSTNAME}
+       
+swarm:
+    image: swarm
+    container_name: shipyard-swarm-manager 
+    restart: always
+    command: manage --host tcp://0.0.0.0:3375 etcd://<IP-OF-HOST>:4001
+
+agent:
+    image: swarm
+    container_name: shipyard-swarm-agent 
+    restart: always
+    command: join --addr <IP-OF-HOST>:5375 etcd://<IP-OF-HOST>:4001
+
+shipyard:
+    image: shipyard/shipyard
+    container_name: shipyard-controller 
+    restart: always
+    external_links:
+     - shipyard-rethinkdb:rethinkdb
+     - shipyard-swarm-manager:swarm
+    ports:
+      - 8080:8080
+    command: server -d tcp://swarm:3375
+
+
+
