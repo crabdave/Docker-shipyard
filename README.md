@@ -13,7 +13,9 @@ msg="Error creating connection: gorethink: dial tcp 172.17.0.2:28015: getsockopt
 rethinkdb启动比较慢，得等会
 ```
 
--系统启动有些慢，得等会再才能打开登录页面，之后的登录也比较慢
--登录shipyard界面
--现在可以访问http://<your-host-ip>:8080来登录shipyard了，默认用户名/密码是：admin/shipyard。
+系统启动有些慢，得等会再才能打开登录页面，之后的登录也比较慢
+
+登录shipyard界面
+
+现在可以访问http://<your-host-ip>:8080来登录shipyard了，默认用户名/密码是：admin/shipyard。
 
