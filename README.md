@@ -27,5 +27,9 @@ shipyard-swarm-agent 启动时join shipyard-proxy 有时候会出现问题，找
 
 登录shipyard界面
 
-现在可以访问http://<your-host-ip>:8080来登录shipyard了，默认用户名/密码是：admin/shipyard。
+现在可以访问
+```
+http://<your-host-ip>:8080
+```
+登录shipyard了，默认用户名/密码是：admin/shipyard。
 
