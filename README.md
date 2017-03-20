@@ -2,9 +2,11 @@
 
 参考：https://shipyard-project.com/
 
-修改vim /etc/sysconfig/docker
+```
+vim /etc/sysconfig/docker
 OPTIONS= 中添加-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock 
-然后systemctl restart docker.service
+systemctl restart docker.service
+```
 
 msg="Error creating connection: gorethink: dial tcp 172.17.0.2:28015: getsockopt: connection refused" 
 rethinkdb启动比较慢，得等会
